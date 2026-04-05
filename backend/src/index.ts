@@ -5,6 +5,7 @@ import { env } from "./config/env.js";
 import authRoutes from "./routes/auth.routes.js";
 import healthRoutes from "./routes/health.routes.js";
 import productRoutes from "./routes/product.routes.js";
+import profileRoutes from "./routes/profile.routes.js";
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.get("/", (_req, res) => {
 app.use("/api/auth", authRoutes);
 app.use("/api/health", healthRoutes);
 app.use("/api/products", productRoutes);
+app.use("/api/profile", profileRoutes);
 
 app.listen(env.port, () => {
   console.log(`API listening on http://localhost:${env.port}`);

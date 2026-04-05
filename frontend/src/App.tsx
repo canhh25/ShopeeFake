@@ -4,6 +4,7 @@ import { Link, Navigate, Route, Routes } from "react-router-dom";
 import { subscribeAuthChanged, TOKEN_STORAGE_KEY } from "./lib/authApi";
 import AdminProducts from "./pages/AdminProducts";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
@@ -38,12 +39,20 @@ function AppShell({ children }: { children: ReactNode }) {
           </Link>
           <nav className="flex flex-wrap items-center gap-2 sm:gap-3">
             {hasToken && (
-              <Link
-                to="/admin/products"
-                className="rounded-lg border border-border bg-secondary/40 px-3 py-2 text-sm font-medium text-text-primary transition hover:bg-secondary/60"
-              >
-                Quản lý sản phẩm
-              </Link>
+              <>
+                <Link
+                  to="/profile"
+                  className="rounded-lg border border-border bg-primary/40 px-3 py-2 text-sm font-medium text-text-primary transition hover:bg-primary/60"
+                >
+                  Hồ sơ
+                </Link>
+                <Link
+                  to="/admin/products"
+                  className="rounded-lg border border-border bg-secondary/40 px-3 py-2 text-sm font-medium text-text-primary transition hover:bg-secondary/60"
+                >
+                  Quản lý sản phẩm
+                </Link>
+              </>
             )}
             <Link
               to="/login"
@@ -72,6 +81,7 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/admin/products" element={<AdminProducts />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>

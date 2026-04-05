@@ -29,12 +29,20 @@ export default function Home() {
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap gap-3">
           {hasToken && (
-            <Link
-              to="/admin/products"
-              className="rounded-lg border border-border bg-primary/50 px-4 py-2 text-sm font-semibold text-text-primary shadow-sm backdrop-blur transition hover:bg-primary/70"
-            >
-              Quản lý sản phẩm
-            </Link>
+            <>
+              <Link
+                to="/profile"
+                className="rounded-lg border border-border bg-primary/50 px-4 py-2 text-sm font-semibold text-text-primary shadow-sm backdrop-blur transition hover:bg-primary/70"
+              >
+                Hồ sơ
+              </Link>
+              <Link
+                to="/admin/products"
+                className="rounded-lg border border-border bg-secondary/40 px-4 py-2 text-sm font-semibold text-text-primary shadow-sm backdrop-blur transition hover:bg-secondary/60"
+              >
+                Quản lý sản phẩm
+              </Link>
+            </>
           )}
           <Link
             to="/login"
