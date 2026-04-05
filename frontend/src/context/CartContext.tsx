@@ -57,6 +57,7 @@ type CartContextValue = {
   setQuantity: (id: string, quantity: number, maxStock?: number) => void;
   totalQuantity: number;
   totalPrice: number;
+  clearCart: () => void;
 };
 
 const CartContext = createContext<CartContextValue | null>(null);
@@ -112,6 +113,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   const removeItem = useCallback((id: string) => {
     setItems((prev) => prev.filter((i) => i.id !== id));
+  }, []);
+
+  const clearCart = useCallback(() => {
+    setItems([]);
   }, []);
 
   const increment = useCallback((id: string, maxStock?: number) => {
@@ -184,11 +189,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       setQuantity,
       totalQuantity,
       totalPrice,
+      clearCart,
     }),
     [
       items,
       addItem,
       removeItem,
+      clearCart,
       increment,
       decrement,
       setQuantity,

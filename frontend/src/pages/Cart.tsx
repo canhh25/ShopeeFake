@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { fetchCatalogProducts } from "../lib/catalogApi";
+import { subscribeAuthChanged, TOKEN_STORAGE_KEY } from "../lib/authApi";
 
 function TrashIcon({ className }: { className?: string }) {
   return (
@@ -31,6 +32,16 @@ export default function Cart() {
   const { items, removeItem, increment, decrement, totalPrice, totalQuantity } =
     useCart();
   const [stocks, setStocks] = useState<Record<string, number>>({});
+  const [hasToken, setHasToken] = useState(() =>
+    Boolean(localStorage.getItem(TOKEN_STORAGE_KEY))
+  );
+
+  useEffect(() => {
+    const sync = () =>
+      setHasToken(Boolean(localStorage.getItem(TOKEN_STORAGE_KEY)));
+    sync();
+    return subscribeAuthChanged(sync);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -179,6 +190,22 @@ export default function Cart() {
                 {formattedTotal}
               </span>
             </div>
+            {hasToken ? (
+              <Link
+                to="/checkout"
+                className="mt-4 flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-primary to-accent py-3.5 text-sm font-semibold text-text-primary shadow-lg shadow-accent/25 transition hover:opacity-90"
+              >
+                Thanh toán
+              </Link>
+            ) : (
+              <Link
+                to="/login"
+                state={{ from: "/checkout" }}
+                className="mt-4 flex w-full items-center justify-center rounded-xl border border-border bg-white py-3.5 text-sm font-semibold text-text-primary transition hover:bg-background"
+              >
+                Đăng nhập để thanh toán
+              </Link>
+            )}
           </div>
         </div>
       )}
