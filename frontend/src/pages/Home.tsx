@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { TOKEN_STORAGE_KEY } from "../lib/authApi";
+import { subscribeAuthChanged, TOKEN_STORAGE_KEY } from "../lib/authApi";
 
 type Health = { ok: boolean; database: string };
 
@@ -10,7 +10,11 @@ export default function Home() {
   const [hasToken, setHasToken] = useState(false);
 
   useEffect(() => {
-    setHasToken(Boolean(localStorage.getItem(TOKEN_STORAGE_KEY)));
+    const sync = () =>
+      setHasToken(Boolean(localStorage.getItem(TOKEN_STORAGE_KEY)));
+    sync();
+    const unsub = subscribeAuthChanged(sync);
+    return unsub;
   }, []);
 
   useEffect(() => {
@@ -23,7 +27,15 @@ export default function Home() {
   return (
     <main className="mx-auto max-w-lg px-6 py-12">
       <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex gap-3">
+        <div className="flex flex-wrap gap-3">
+          {hasToken && (
+            <Link
+              to="/admin/products"
+              className="rounded-lg border border-white/50 bg-white/15 px-4 py-2 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/25"
+            >
+              Quản lý sản phẩm
+            </Link>
+          )}
           <Link
             to="/login"
             className="rounded-lg border border-white/40 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur transition hover:bg-white/20"

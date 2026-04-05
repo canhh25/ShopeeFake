@@ -47,3 +47,14 @@ export async function loginRequest(body: {
 }
 
 export const TOKEN_STORAGE_KEY = "token";
+
+const AUTH_CHANGE_EVENT = "shopeefake-auth-change";
+
+export function notifyAuthChanged(): void {
+  window.dispatchEvent(new Event(AUTH_CHANGE_EVENT));
+}
+
+export function subscribeAuthChanged(cb: () => void): () => void {
+  window.addEventListener(AUTH_CHANGE_EVENT, cb);
+  return () => window.removeEventListener(AUTH_CHANGE_EVENT, cb);
+}

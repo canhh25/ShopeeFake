@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { loginRequest, TOKEN_STORAGE_KEY } from "../lib/authApi";
+import {
+  loginRequest,
+  notifyAuthChanged,
+  TOKEN_STORAGE_KEY,
+} from "../lib/authApi";
 
 export default function Login() {
   const navigate = useNavigate();
@@ -29,6 +33,7 @@ export default function Login() {
     try {
       const { token } = await loginRequest({ email, password });
       localStorage.setItem(TOKEN_STORAGE_KEY, token);
+      notifyAuthChanged();
       setSuccessMsg("Đăng nhập thành công!");
       window.setTimeout(() => navigate("/", { replace: true }), 900);
     } catch (err) {
