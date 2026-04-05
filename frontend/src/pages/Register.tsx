@@ -2,6 +2,9 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { registerRequest } from "../lib/authApi";
 
+const inputClass =
+  "w-full rounded-xl border border-border bg-background px-4 py-3 text-text-primary outline-none ring-accent/25 transition placeholder:text-text-secondary focus:border-accent focus:bg-white focus:ring-4";
+
 export default function Register() {
   const navigate = useNavigate();
   const [name, setName] = useState("");
@@ -28,18 +31,18 @@ export default function Register() {
     <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center px-4 py-10">
       <div className="w-full max-w-md">
         <div className="mb-8 text-center">
-          <h1 className="text-3xl font-bold text-white drop-shadow-sm">
+          <h1 className="text-3xl font-bold text-text-primary drop-shadow-sm">
             Tạo tài khoản
           </h1>
-          <p className="mt-2 text-sm text-white/85">
+          <p className="mt-2 text-sm text-text-secondary">
             Tham gia ShopeeFake trong vài giây
           </p>
         </div>
 
-        <div className="rounded-2xl bg-white p-8 shadow-2xl shadow-black/15 ring-1 ring-black/5">
+        <div className="rounded-2xl border border-border bg-white p-8 shadow-xl shadow-text-primary/10">
           {error && (
             <div
-              className="mb-4 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-800"
+              className="mb-4 rounded-xl border border-border bg-secondary/50 px-4 py-3 text-sm text-text-primary"
               role="alert"
             >
               {error}
@@ -50,7 +53,7 @@ export default function Register() {
             <div>
               <label
                 htmlFor="reg-name"
-                className="mb-1.5 block text-sm font-medium text-slate-700"
+                className="mb-1.5 block text-sm font-medium text-text-primary"
               >
                 Họ tên
               </label>
@@ -61,14 +64,14 @@ export default function Register() {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-slate-900 outline-none ring-[#ee4d2d]/30 transition focus:border-[#ee4d2d] focus:bg-white focus:ring-4"
+                className={inputClass}
                 placeholder="Nguyễn Văn A"
               />
             </div>
             <div>
               <label
                 htmlFor="reg-email"
-                className="mb-1.5 block text-sm font-medium text-slate-700"
+                className="mb-1.5 block text-sm font-medium text-text-primary"
               >
                 Email
               </label>
@@ -79,14 +82,14 @@ export default function Register() {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-slate-900 outline-none ring-[#ee4d2d]/30 transition focus:border-[#ee4d2d] focus:bg-white focus:ring-4"
+                className={inputClass}
                 placeholder="you@example.com"
               />
             </div>
             <div>
               <label
                 htmlFor="reg-password"
-                className="mb-1.5 block text-sm font-medium text-slate-700"
+                className="mb-1.5 block text-sm font-medium text-text-primary"
               >
                 Mật khẩu
               </label>
@@ -98,24 +101,24 @@ export default function Register() {
                 minLength={6}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-xl border border-slate-200 bg-slate-50/80 px-4 py-3 text-slate-900 outline-none ring-[#ee4d2d]/30 transition focus:border-[#ee4d2d] focus:bg-white focus:ring-4"
+                className={inputClass}
                 placeholder="Tối thiểu 6 ký tự"
               />
             </div>
             <button
               type="submit"
               disabled={loading}
-              className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-[#ee4d2d] to-[#ff7337] py-3.5 text-sm font-semibold text-white shadow-lg shadow-orange-500/25 transition hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-60"
+              className="flex w-full items-center justify-center rounded-xl bg-gradient-to-r from-primary to-accent py-3.5 text-sm font-semibold text-text-primary shadow-lg shadow-accent/30 transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {loading ? "Đang tạo tài khoản…" : "Đăng ký"}
             </button>
           </form>
 
-          <p className="mt-6 text-center text-sm text-slate-600">
+          <p className="mt-6 text-center text-sm text-text-secondary">
             Đã có tài khoản?{" "}
             <Link
               to="/login"
-              className="font-semibold text-[#ee4d2d] hover:underline"
+              className="font-semibold text-text-primary underline-offset-2 hover:underline"
             >
               Đăng nhập
             </Link>

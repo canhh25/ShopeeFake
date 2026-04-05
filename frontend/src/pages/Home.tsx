@@ -31,51 +31,57 @@ export default function Home() {
           {hasToken && (
             <Link
               to="/admin/products"
-              className="rounded-lg border border-white/50 bg-white/15 px-4 py-2 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/25"
+              className="rounded-lg border border-border bg-primary/50 px-4 py-2 text-sm font-semibold text-text-primary shadow-sm backdrop-blur transition hover:bg-primary/70"
             >
               Quản lý sản phẩm
             </Link>
           )}
           <Link
             to="/login"
-            className="rounded-lg border border-white/40 bg-white/10 px-4 py-2 text-sm font-medium text-white backdrop-blur transition hover:bg-white/20"
+            className="rounded-lg border border-border bg-white/80 px-4 py-2 text-sm font-medium text-text-primary shadow-sm backdrop-blur transition hover:bg-white"
           >
             Đăng nhập
           </Link>
           <Link
             to="/register"
-            className="rounded-lg bg-white px-4 py-2 text-sm font-semibold text-[#ee4d2d] shadow-md transition hover:bg-orange-50"
+            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-text-primary shadow-md ring-1 ring-border transition hover:bg-accent/90"
           >
             Đăng ký
           </Link>
         </div>
         {hasToken && (
-          <span className="rounded-full bg-emerald-500/20 px-3 py-1 text-xs font-medium text-emerald-100 ring-1 ring-emerald-400/40">
+          <span className="rounded-full bg-secondary/60 px-3 py-1 text-xs font-medium text-text-primary ring-1 ring-border">
             Đã đăng nhập
           </span>
         )}
       </div>
 
-      <h1 className="mb-2 text-4xl font-bold tracking-tight text-white drop-shadow-sm">
+      <h1 className="mb-2 text-4xl font-bold tracking-tight text-text-primary drop-shadow-sm">
         Hello World
       </h1>
-      <p className="mb-8 text-lg text-white/90">
+      <p className="mb-8 text-lg text-text-secondary">
         ShopeeFake — frontend đã chạy trên localhost.
       </p>
 
-      <section className="rounded-2xl bg-white p-6 shadow-xl shadow-black/10 ring-1 ring-black/5">
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-[#ee4d2d]">
+      <section className="rounded-2xl border border-border bg-white p-6 shadow-lg shadow-text-primary/5">
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-text-primary">
           Trạng thái API &amp; Database
         </h2>
-        {err && <p className="text-sm text-red-600">{err}</p>}
+        {err && (
+          <p className="text-sm text-text-primary">
+            <span className="rounded-md border border-border bg-secondary/40 px-2 py-0.5">
+              {err}
+            </span>
+          </p>
+        )}
         {health && !err && (
-          <p className="text-slate-700">
+          <p className="text-text-primary">
             API:{" "}
-            <span className="font-medium text-emerald-600">
+            <span className="font-medium text-primary">
               {health.ok ? "OK" : "Lỗi"}
             </span>{" "}
             — Database:{" "}
-            <strong className="text-slate-900">{health.database}</strong>
+            <strong className="text-text-primary">{health.database}</strong>
           </p>
         )}
       </section>

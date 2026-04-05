@@ -27,33 +27,33 @@ function useHasToken() {
 function AppShell({ children }: { children: ReactNode }) {
   const hasToken = useHasToken();
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#ee4d2d] via-[#ff6b3d] to-[#ffb38a]">
-      <header className="border-b border-white/10 bg-black/5 backdrop-blur-sm">
+    <div className="min-h-screen bg-gradient-to-br from-primary/50 via-background to-secondary/40">
+      <header className="border-b border-border bg-white/75 backdrop-blur-md">
         <div className="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-3 px-6 py-4">
           <Link
             to="/"
-            className="text-lg font-bold tracking-tight text-white drop-shadow-sm"
+            className="text-lg font-bold tracking-tight text-text-primary drop-shadow-sm"
           >
-            Shopee<span className="font-black text-yellow-200">Fake</span>
+            Shopee<span className="font-black text-accent">Fake</span>
           </Link>
           <nav className="flex flex-wrap items-center gap-2 sm:gap-3">
             {hasToken && (
               <Link
                 to="/admin/products"
-                className="rounded-lg px-3 py-2 text-sm font-medium text-white/95 ring-1 ring-white/25 transition hover:bg-white/10"
+                className="rounded-lg border border-border bg-secondary/40 px-3 py-2 text-sm font-medium text-text-primary transition hover:bg-secondary/60"
               >
                 Quản lý sản phẩm
               </Link>
             )}
             <Link
               to="/login"
-              className="rounded-lg px-3 py-2 text-sm font-medium text-white/95 transition hover:bg-white/10"
+              className="rounded-lg px-3 py-2 text-sm font-medium text-text-primary transition hover:bg-primary/40"
             >
               Đăng nhập
             </Link>
             <Link
               to="/register"
-              className="rounded-lg bg-white/95 px-3 py-2 text-sm font-semibold text-[#ee4d2d] shadow-sm transition hover:bg-white"
+              className="rounded-lg bg-accent px-3 py-2 text-sm font-semibold text-text-primary shadow-sm ring-1 ring-border transition hover:bg-accent/90"
             >
               Đăng ký
             </Link>
