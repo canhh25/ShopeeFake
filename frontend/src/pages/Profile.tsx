@@ -142,6 +142,12 @@ export default function Profile() {
             </div>
             <div>
               <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
+                Vai trò
+              </p>
+              <p className="mt-1 text-text-primary">{profile.role}</p>
+            </div>
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
                 Họ tên
               </p>
               <p className="mt-1 text-text-primary">
@@ -184,6 +190,12 @@ export default function Profile() {
               <p className="mt-1 text-xs text-text-secondary">
                 Email không thể thay đổi tại đây.
               </p>
+            </div>
+            <div>
+              <p className="text-xs font-medium uppercase tracking-wide text-text-secondary">
+                Vai trò
+              </p>
+              <p className="mt-1 text-text-primary">{profile.role}</p>
             </div>
             {saveError && (
               <div

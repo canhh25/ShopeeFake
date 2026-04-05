@@ -4,6 +4,7 @@ export type AuthUser = {
   id: string;
   email: string;
   name: string | null;
+  role: string;
 };
 
 export async function registerRequest(body: {
@@ -47,6 +48,23 @@ export async function loginRequest(body: {
 }
 
 export const TOKEN_STORAGE_KEY = "token";
+
+/** Đọc role từ JWT (payload, không verify — chỉ để hiển thị menu). */
+export function getRoleFromToken(): string | null {
+  const t = localStorage.getItem(TOKEN_STORAGE_KEY);
+  if (!t) return null;
+  const parts = t.split(".");
+  if (parts.length !== 3) return null;
+  try {
+    let base64 = parts[1].replace(/-/g, "+").replace(/_/g, "/");
+    while (base64.length % 4) base64 += "=";
+    const json = atob(base64);
+    const payload = JSON.parse(json) as { role?: string };
+    return typeof payload.role === "string" ? payload.role : null;
+  } catch {
+    return null;
+  }
+}
 
 const AUTH_CHANGE_EVENT = "shopeefake-auth-change";
 

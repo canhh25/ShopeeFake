@@ -1,8 +1,9 @@
 import type { RequestHandler } from "express";
 import jwt from "jsonwebtoken";
 import { getJwtSecret } from "../config/env.js";
+import prisma from "../db/client.js";
 
-export const requireAuth: RequestHandler = (req, res, next) => {
+export const requireAuth: RequestHandler = async (req, res, next) => {
   const raw = req.headers.authorization;
   if (!raw?.startsWith("Bearer ")) {
     res.status(401).json({ error: "Cần đăng nhập để thực hiện thao tác này" });
@@ -24,9 +25,28 @@ export const requireAuth: RequestHandler = (req, res, next) => {
       res.status(401).json({ error: "Token không hợp lệ" });
       return;
     }
+
+    const user = await prisma.user.findUnique({
+      where: { id: userId },
+      select: { isBlocked: true },
+    });
+    if (!user) {
+      res.status(401).json({ error: "Người dùng không tồn tại" });
+      return;
+    }
+    if (user.isBlocked) {
+      res.status(403).json({ error: "Tài khoản đã bị khóa" });
+      return;
+    }
+
     req.auth = { userId, email };
     next();
-  } catch {
-    res.status(401).json({ error: "Phiên đăng nhập hết hạn hoặc không hợp lệ" });
+  } catch (e) {
+    if (e instanceof jwt.JsonWebTokenError || e instanceof jwt.TokenExpiredError) {
+      res.status(401).json({ error: "Phiên đăng nhập hết hạn hoặc không hợp lệ" });
+      return;
+    }
+    console.error(e);
+    res.status(500).json({ error: "Lỗi máy chủ" });
   }
 };

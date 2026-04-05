@@ -46,6 +46,7 @@ export async function registerUser(input: {
       id: true,
       email: true,
       name: true,
+      role: true,
       createdAt: true,
     },
   });
@@ -65,8 +66,12 @@ export async function loginUser(input: { email: string; password: string }) {
     throw new AuthError("Email hoặc mật khẩu không đúng", 401);
   }
 
+  if (user.isBlocked) {
+    throw new AuthError("Tài khoản đã bị khóa", 403);
+  }
+
   const token = jwt.sign(
-    { sub: user.id, email: user.email },
+    { sub: user.id, email: user.email, role: user.role },
     getJwtSecret(),
     { expiresIn: "7d" }
   );
@@ -77,6 +82,7 @@ export async function loginUser(input: { email: string; password: string }) {
       id: user.id,
       email: user.email,
       name: user.name,
+      role: user.role,
     },
   };
 }

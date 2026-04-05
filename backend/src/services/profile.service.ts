@@ -6,6 +6,8 @@ const profileSelect = {
   name: true,
   phone: true,
   shippingAddress: true,
+  role: true,
+  isBlocked: true,
   createdAt: true,
   updatedAt: true,
 } as const;
