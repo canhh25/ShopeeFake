@@ -8,6 +8,7 @@ import {
   updateProductApi,
   type Product,
 } from "../lib/productsApi";
+import AdminDashboard from "./AdminDashboard";
 
 const emptyForm = {
   name: "",
@@ -157,6 +158,8 @@ export default function AdminProducts() {
           ← Về trang chủ
         </Link>
       </div>
+
+      <AdminDashboard />
 
       <section className="mb-10 rounded-2xl border border-border bg-white p-6 shadow-lg shadow-text-primary/5 sm:p-8">
         <h2 className="mb-4 text-lg font-semibold text-text-primary">
