@@ -110,6 +110,12 @@ function AppShell({ children }: { children: ReactNode }) {
                 {isAdmin && (
                   <>
                     <Link
+                      to="/admin/products"
+                      className="rounded-lg border border-border bg-primary/40 px-3 py-2 text-sm font-medium text-text-primary transition hover:bg-primary/60"
+                    >
+                      Dashboard
+                    </Link>
+                    <Link
                       to="/admin/users"
                       className="rounded-lg border border-border bg-accent/50 px-3 py-2 text-sm font-medium text-text-primary transition hover:bg-accent/70"
                     >

@@ -1,6 +1,7 @@
 import type { RequestHandler } from "express";
 import {
   AdminUserError,
+  getDashboardStats,
   listAllUsersPublic,
   toggleUserBlocked,
 } from "../services/admin.service.js";
@@ -41,6 +42,16 @@ export const toggleUserBlock: RequestHandler = async (req, res) => {
       res.status(e.statusCode).json({ error: e.message });
       return;
     }
+    console.error(e);
+    res.status(500).json({ error: "Lỗi máy chủ" });
+  }
+};
+
+export const getStats: RequestHandler = async (_req, res) => {
+  try {
+    const stats = await getDashboardStats();
+    res.json({ stats });
+  } catch (e) {
     console.error(e);
     res.status(500).json({ error: "Lỗi máy chủ" });
   }
