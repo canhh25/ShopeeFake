@@ -7,6 +7,7 @@ import {
   getRoleFromToken,
   subscribeAuthChanged,
   TOKEN_STORAGE_KEY,
+  notifyAuthChanged,
 } from "./lib/authApi";
 import AdminProducts from "./pages/AdminProducts";
 import AdminUsers from "./pages/AdminUsers";
@@ -129,20 +130,34 @@ function AppShell({ children }: { children: ReactNode }) {
                     </Link>
                   </>
                 )}
+                <button
+                  type="button"
+                  onClick={() => {
+                    localStorage.removeItem(TOKEN_STORAGE_KEY);
+                    notifyAuthChanged();
+                  }}
+                  className="rounded-lg border border-border bg-secondary/50 px-3 py-2 text-sm font-medium text-text-primary transition hover:bg-secondary/70"
+                >
+                  Đăng xuất
+                </button>
               </>
             )}
-            <Link
-              to="/login"
-              className="rounded-lg px-3 py-2 text-sm font-medium text-text-primary transition hover:bg-primary/40"
-            >
-              Đăng nhập
-            </Link>
-            <Link
-              to="/register"
-              className="rounded-lg bg-accent px-3 py-2 text-sm font-semibold text-text-primary shadow-sm ring-1 ring-border transition hover:bg-accent/90"
-            >
-              Đăng ký
-            </Link>
+          {!hasToken && (
+            <>
+              <Link
+                to="/login"
+                className="rounded-lg px-3 py-2 text-sm font-medium text-text-primary transition hover:bg-primary/40"
+              >
+                Đăng nhập
+              </Link>
+              <Link
+                to="/register"
+                className="rounded-lg bg-accent px-3 py-2 text-sm font-semibold text-text-primary shadow-sm ring-1 ring-border transition hover:bg-accent/90"
+              >
+                Đăng ký
+              </Link>
+            </>
+          )}
           </nav>
         </div>
       </header>

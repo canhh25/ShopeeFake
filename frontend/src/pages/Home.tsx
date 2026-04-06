@@ -118,18 +118,22 @@ export default function Home() {
               )}
             </>
           )}
-          <Link
-            to="/login"
-            className="rounded-lg border border-border bg-white/80 px-4 py-2 text-sm font-medium text-text-primary shadow-sm backdrop-blur transition hover:bg-white"
-          >
-            Đăng nhập
-          </Link>
-          <Link
-            to="/register"
-            className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-text-primary shadow-md ring-1 ring-border transition hover:bg-accent/90"
-          >
-            Đăng ký
-          </Link>
+          {!hasToken && (
+            <>
+              <Link
+                to="/login"
+                className="rounded-lg border border-border bg-white/80 px-4 py-2 text-sm font-medium text-text-primary shadow-sm backdrop-blur transition hover:bg-white"
+              >
+                Đăng nhập
+              </Link>
+              <Link
+                to="/register"
+                className="rounded-lg bg-accent px-4 py-2 text-sm font-semibold text-text-primary shadow-md ring-1 ring-border transition hover:bg-accent/90"
+              >
+                Đăng ký
+              </Link>
+            </>
+          )}
         </div>
         {hasToken && (
           <span className="rounded-full bg-secondary/60 px-3 py-1 text-xs font-medium text-text-primary ring-1 ring-border">
