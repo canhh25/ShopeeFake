@@ -170,7 +170,7 @@ export default function AdminDashboard() {
                   }
                 />
                 <Tooltip
-                  formatter={(v: number) => [formatVND(v), "Doanh thu"]}
+                  formatter={(v: any) => [formatVND(v), "Doanh thu"]}
                   labelFormatter={(l) => `Ngày ${l}`}
                   contentStyle={{
                     borderRadius: "12px",
